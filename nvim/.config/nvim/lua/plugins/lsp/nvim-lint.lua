@@ -10,16 +10,20 @@ return {
         "pylint"
       },
       javascript = {
-        "eslint"
+        "eslint",
+        "eslint_d"
       },
       javascriptreact = {
-        "eslint"
+        "eslint",
+        "eslint_d"
       },
       typescript = {
-        "eslint"
+        "eslint",
+        "eslint_d"
       },
       typescriptreact = {
-        "eslint"
+        "eslint",
+        "eslint_d"
       },
       htmldjango = {
         "djlint", "jinja-lsp"

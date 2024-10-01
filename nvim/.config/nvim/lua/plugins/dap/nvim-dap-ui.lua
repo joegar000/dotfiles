@@ -12,6 +12,24 @@ return {
     'theHamsta/nvim-dap-virtual-text', -- inline variable text while debugging
     -- https://github.com/nvim-telescope/telescope-dap.nvim
     'nvim-telescope/telescope-dap.nvim', -- telescope integration with dap
+    {
+      'folke/which-key.nvim',
+      optional = true,
+      opts = {
+        defaults = {
+          ['<leader>d'] = { name = '+DAP' }
+        }
+      }
+    }
+  },
+  keys = {
+    { '<leader>du', function() require('dapui').toggle() end, desc = 'Toggle DAP UI' },
+    { '<leader>dc', function() require('dap').continue() end, desc = 'Continue' },
+    { '<leader>dn', function() require('dap').step_over() end, desc = 'Step Over' },
+    { '<leader>do', function() require('dap').step_out() end, desc = 'Step Out' },
+    { '<leader>db', function() require('dap').toggle_breakpoint() end, desc = 'Toggle Breakpoint' },
+    { '<leader>dh', function() require('dap.ui.widgets').hover() end, desc = 'Hover' },
+    { '<leader>dv', function() require('dap.ui.widgets').preview() end, desc = 'Preview' },
   },
   opts = {
     controls = {
