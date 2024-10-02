@@ -31,17 +31,17 @@ return {
       -- }
     })
 
-    table.insert(dap.configurations.python, {
-      name = "Launch Flask Server (External Terminal)",
-      type = "python",
-      request = "launch",
-      console = "externalTerminal",
-      module = "flask",
-      justMyCode = false,
-      args = get_args
-      -- args = {
-      --   "run", "-h", "0.0.0.0", "-p", "8087", "--cert=adhoc", "--debug"
-      -- }
-    })
+    -- table.insert(dap.configurations.python, {
+    --   name = "Launch Flask Server (External Terminal)",
+    --   type = "python",
+    --   request = "launch",
+    --   console = "externalTerminal",
+    --   module = "flask",
+    --   justMyCode = false,
+    --   args = get_args
+    --   -- args = {
+    --   --   "run", "-h", "0.0.0.0", "-p", "8087", "--cert=adhoc", "--debug"
+    --   -- }
+    -- })
   end
 }
