@@ -34,7 +34,7 @@ return {
           'lua_ls',
           'basedpyright',
           'pylsp',
-          'tsserver'
+          'ts_ls'
         },
         handlers = {
           -- this first function is the "default handler"
