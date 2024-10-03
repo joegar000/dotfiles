@@ -8,6 +8,20 @@ return {
         ["vim.lsp.util.stylize_markdown"] = true,
         ["cmp.entry.get_documentation"] = true,
       },
+      hover = {
+        enabled = true,
+        view = "hover",
+        border = {
+          style = "rounded"
+        }
+      },
+      signature = {
+        enabled = true,
+        view = "hover",
+        border = {
+          style = "rounded"
+        }
+      },
       documentation = {
         view = "hover",
         opts = { -- lsp_docs settings
@@ -65,6 +79,9 @@ return {
     { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
   },
   dependencies = {
-    { 'MunifTanjim/nui.nvim' }
+    {
+      'MunifTanjim/nui.nvim',
+      "rcarriga/nvim-notify"
+    }
   }
 }
