@@ -1,3 +1,29 @@
+local function flatten_ft_to_str(t)
+  local flattened = {}
+  for _, ft in pairs(t) do
+    for _, s in ipairs(ft) do
+      table.insert(flattened, s)
+    end
+  end
+  return flattened
+end
+
+local function merge_tables(t1, t2)
+  local merged = {}
+
+  -- Copy all elements from the first table
+  for k, v in pairs(t1) do
+    merged[k] = v
+  end
+
+  -- Copy all elements from the second table, overriding duplicates
+  for k, v in pairs(t2) do
+    merged[k] = v
+  end
+
+  return merged
+end
+
 return {
   {
     'williamboman/mason.nvim',
@@ -101,5 +127,78 @@ return {
         desc = "Source Action",
       },
     },
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = {
+      "mfussenegger/nvim-lint",
+      "stevearc/conform.nvim"
+    },
+    event = "BufReadPost",
+    config = function()
+      local linters_by_ft = {
+        python = {
+          "flake8",
+          "mypy",
+          "pylint"
+        },
+        javascript = {
+          "eslint_d"
+        },
+        javascriptreact = {
+          "eslint_d"
+        },
+        typescript = {
+          "eslint_d"
+        },
+        typescriptreact = {
+          "eslint_d"
+        },
+        htmldjango = {
+          "djlint", "jinja-lsp"
+        }
+      }
+
+      local formatters_by_ft = {
+        lua = { "stylua" },
+        python = { "autopep8", "autoflake" },
+        yaml = { "yamlfmt" },
+        css = { "prettierd" },
+        flow = { "prettierd" },
+        html = { "prettierd" },
+        json = { "prettierd" },
+        javascriptreact = { "prettierd" },
+        javascript = { "prettierd" },
+        less = { "prettierd" },
+        markdown = { "prettierd" },
+        scss = { "prettierd" },
+        typescript = { "prettierd" },
+        typescriptreact = { "prettierd" },
+        vue = { "prettierd" },
+      }
+
+      local ensure_installed = merge_tables(flatten_ft_to_str(linters_by_ft), flatten_ft_to_str(formatters_by_ft))
+      require('mason-tool-installer').setup({
+        ensure_installed = ensure_installed,
+        integrations = {
+          ['mason-nvim-dap'] = true
+        }
+      })
+
+      require("lint").linters_by_ft = linters_by_ft
+
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+          require("lint").try_lint()
+        end,
+      })
+
+      require('conform').setup({
+        formatters_by_ft = formatters_by_ft,
+      })
+    end,
+    keys = {
+      { "<leader>gf", function() require('conform').format() end, desc = "Format" }
+    }
   }
 }
