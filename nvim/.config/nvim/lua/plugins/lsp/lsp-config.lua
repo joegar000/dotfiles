@@ -94,6 +94,12 @@ return {
           }
         }
       })
+      vim.diagnostic.config({
+        virtual_text = false,
+        float = {
+          border = 'rounded'
+        }
+      })
     end,
     keys = {
       { 'K',           vim.lsp.buf.hover,                                                                      desc = 'Hover' },
