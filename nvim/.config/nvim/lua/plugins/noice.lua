@@ -17,6 +17,9 @@ return {
       },
       signature = {
         enabled = true,
+        auto_open = {
+          enabled = false
+        },
         view = "hover",
         border = {
           style = "rounded"
