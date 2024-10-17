@@ -10,6 +10,14 @@ return {
       html = {
         names = true,
         css_fn = true
+      },
+      htmldjango = {
+        names = true,
+        css_fn = true
+      },
+      jinja = {
+        names = true,
+        css_fn = true
       }
     },
     user_default_options = {
