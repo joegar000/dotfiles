@@ -6,6 +6,10 @@ return {
       css = {
         names = true,
         css_fn = true
+      },
+      html = {
+        names = true,
+        css_fn = true
       }
     },
     user_default_options = {
