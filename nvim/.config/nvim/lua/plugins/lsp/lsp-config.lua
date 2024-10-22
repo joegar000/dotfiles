@@ -133,7 +133,7 @@ return {
     },
     config = function()
       require('mason-nvim-lint').setup({
-        ensure_installed = { "flake8", "mypy", "eslint_d", "djlint" },
+        ensure_installed = { "flake8", "mypy", "eslint_d", "djlint", "actionlint" },
       })
     end
   },
