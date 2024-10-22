@@ -1,29 +1,3 @@
-local function flatten_ft_to_str(t)
-  local flattened = {}
-  for _, ft in pairs(t) do
-    for _, s in ipairs(ft) do
-      table.insert(flattened, s)
-    end
-  end
-  return flattened
-end
-
-local function merge_tables(t1, t2)
-  local merged = {}
-
-  -- Copy all elements from the first table
-  for k, v in pairs(t1) do
-    merged[k] = v
-  end
-
-  -- Copy all elements from the second table, overriding duplicates
-  for k, v in pairs(t2) do
-    merged[k] = v
-  end
-
-  return merged
-end
-
 return {
   {
     'williamboman/mason.nvim',
@@ -60,7 +34,8 @@ return {
           'lua_ls',
           'basedpyright',
           'pylsp',
-          'ts_ls'
+          'ts_ls',
+          'jinja_lsp'
         },
         handlers = {
           -- this first function is the "default handler"
@@ -94,6 +69,22 @@ return {
           }
         }
       })
+
+      lspconfig['jinja_lsp'].setup({
+        capabilities = capabilities,
+        filetypes = { 'jinja', 'htmldjango', 'html' },
+        init_options = {
+          templates = '.',
+          backend = { '.', './editors', './customers' },
+          lang = "python"
+        }
+      })
+
+      lspconfig['html'].setup({
+        capabilities = capabilities,
+        filetypes = { 'html', 'templ', 'jinja', 'htmldjango' }
+      })
+
       vim.diagnostic.config({
         virtual_text = false,
         float = {
@@ -116,8 +107,9 @@ return {
       { '<leader>cr',  vim.lsp.buf.rename,                                                                     desc = 'Rename' },
       { ']d',          vim.diagnostic.goto_next,                                                               desc = 'Go to next diagnostic' },
       { '[d',          vim.diagnostic.goto_prev,                                                               desc = 'Go to previous diagnostic' },
-      { "<leader>cc",  vim.lsp.codelens.run,                                                                   desc = "Run Codelens",               mode = { "n", "v" } },
-      { "<leader>cC",  vim.lsp.codelens.refresh,                                                               desc = "Refresh & Display Codelens", mode = { "n" } },
+      { '<leader>cc',  vim.lsp.codelens.run,                                                                   desc = 'Run Codelens',               mode = { 'n', 'v' } },
+      { '<leader>cC',  vim.lsp.codelens.refresh,                                                               desc = 'Refresh & Display Codelens', mode = { 'n' } },
+      { '<leader>gf',  vim.lsp.buf.format,                                                                     desc = 'Format' },
       {
         "<leader>cA",
         function()
@@ -135,76 +127,29 @@ return {
     },
   },
   {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    "jay-babu/mason-null-ls.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = {
-      "mfussenegger/nvim-lint",
-      "stevearc/conform.nvim"
+      "williamboman/mason.nvim",
+      {
+        "nvimtools/none-ls.nvim",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = { "nvim-lua/plenary.nvim" },
+      }
     },
-    event = "BufReadPost",
     config = function()
-      local linters_by_ft = {
-        python = {
-          "flake8",
-          "mypy",
-          "pylint"
-        },
-        javascript = {
-          "eslint_d"
-        },
-        javascriptreact = {
-          "eslint_d"
-        },
-        typescript = {
-          "eslint_d"
-        },
-        typescriptreact = {
-          "eslint_d"
-        },
-        htmldjango = {
-          "djlint", "jinja-lsp"
-        }
-      }
-
-      local formatters_by_ft = {
-        lua = { "stylua" },
-        python = { "autopep8", "autoflake" },
-        yaml = { "yamlfmt" },
-        css = { "prettierd" },
-        flow = { "prettierd" },
-        html = { "prettierd" },
-        json = { "prettierd" },
-        javascriptreact = { "prettierd" },
-        javascript = { "prettierd" },
-        less = { "prettierd" },
-        markdown = { "prettierd" },
-        scss = { "prettierd" },
-        typescript = { "prettierd" },
-        typescriptreact = { "prettierd" },
-        vue = { "prettierd" },
-      }
-
-      local ensure_installed = merge_tables(flatten_ft_to_str(linters_by_ft), flatten_ft_to_str(formatters_by_ft))
-      require('mason-tool-installer').setup({
-        ensure_installed = ensure_installed,
-        integrations = {
-          ['mason-nvim-dap'] = true
-        }
+      -- primary source of truth is mason
+      require('mason-null-ls').setup({
+        ensure_installed = { "stylua", "flake8", "mypy", "autopep8", "autoflake", "eslint_d", "djlint", "yamlfmt", "prettierd" }
       })
-
-      require("lint").linters_by_ft = linters_by_ft
-
-      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-        callback = function()
-          require("lint").try_lint()
-        end,
-      })
-
-      require('conform').setup({
-        formatters_by_ft = formatters_by_ft,
+      local null_ls = require('null-ls')
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.djhtml.with({
+            filetypes = { "django", "jinja.html", "htmldjango" }
+          })
+        }
       })
     end,
-    keys = {
-      { "<leader>gf", function() require('conform').format() end, desc = "Format" }
-    }
   }
 }
