@@ -109,7 +109,6 @@ return {
       { '[d',          vim.diagnostic.goto_prev,                                                               desc = 'Go to previous diagnostic' },
       { '<leader>cc',  vim.lsp.codelens.run,                                                                   desc = 'Run Codelens',               mode = { 'n', 'v' } },
       { '<leader>cC',  vim.lsp.codelens.refresh,                                                               desc = 'Refresh & Display Codelens', mode = { 'n' } },
-      { '<leader>gf',  vim.lsp.buf.format,                                                                     desc = 'Format' },
       {
         "<leader>cA",
         function()
@@ -127,29 +126,74 @@ return {
     },
   },
   {
-    "jay-babu/mason-null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
+    "rshkarin/mason-nvim-lint",
     dependencies = {
       "williamboman/mason.nvim",
-      {
-        "nvimtools/none-ls.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        dependencies = { "nvim-lua/plenary.nvim" },
-      }
+      "mfussenegger/nvim-lint"
     },
     config = function()
-      -- primary source of truth is mason
-      require('mason-null-ls').setup({
-        ensure_installed = { "stylua", "flake8", "mypy", "autopep8", "autoflake", "eslint_d", "djlint", "yamlfmt", "prettierd" }
+      require('mason-nvim-lint').setup({
+        ensure_installed = { "flake8", "mypy", "eslint_d", "djlint" },
       })
-      local null_ls = require('null-ls')
-      null_ls.setup({
-        sources = {
-          null_ls.builtins.formatting.djhtml.with({
-            filetypes = { "django", "jinja.html", "htmldjango" }
-          })
+    end
+  },
+  {
+    "zapling/mason-conform.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "stevearc/conform.nvim"
+    },
+    config = function()
+      require('conform').setup({
+        formatters_by_ft = {
+          lua = { "stylua" },
+          python = { "autopep8", "autoflake" },
+          yaml = { "yamlfmt" },
+          css = { "prettierd" },
+          flow = { "prettierd" },
+          html = { "prettierd" },
+          json = { "prettierd" },
+          javascriptreact = { "prettierd" },
+          javascript = { "prettierd" },
+          less = { "prettierd" },
+          markdown = { "prettierd" },
+          scss = { "prettierd" },
+          typescript = { "prettierd" },
+          typescriptreact = { "prettierd" },
+          vue = { "prettierd" },
         }
       })
+      require('mason-conform').setup()
     end,
+    keys = {
+      { '<leader>gf', function() require('conform').format() end, desc = 'Format' },
+    }
   }
+  -- {
+  --   "jay-babu/mason-null-ls.nvim",
+  --   event = { "BufReadPre", "BufNewFile" },
+  --   dependencies = {
+  --     "williamboman/mason.nvim",
+  --     {
+  --       "nvimtools/none-ls.nvim",
+  --       event = { "BufReadPre", "BufNewFile" },
+  --       dependencies = { "nvim-lua/plenary.nvim" },
+  --     }
+  --   },
+  --   config = function()
+  --     -- primary source of truth is mason
+  --     require('mason-null-ls').setup({
+  --       ensure_installed = { "stylua", "flake8", "mypy", "autopep8", "autoflake", "eslint_d", "djlint", "yamlfmt", "prettierd" },
+  --       automatic_installation = false
+  --     })
+  --     local null_ls = require('null-ls')
+  --     null_ls.setup({
+  --       sources = {
+  --         null_ls.builtins.formatting.djhtml.with({
+  --           filetypes = { "django", "jinja.html", "htmldjango" }
+  --         })
+  --       }
+  --     })
+  --   end,
+  -- },
 }
