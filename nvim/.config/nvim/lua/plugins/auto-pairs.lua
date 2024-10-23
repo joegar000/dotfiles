@@ -1,6 +1,6 @@
 return {
   "jiangmiao/auto-pairs",
-  lazy = false,
+  event = "BufReadPost",
   keys = {
     {
       '<leader>ap',

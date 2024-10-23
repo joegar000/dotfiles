@@ -3,7 +3,5 @@ return {
     config = function()
         require('mini.animate').setup()
     end,
-    enabled = function()
-        return not InNeovide
-    end
+    cond = not InNeovide
 }

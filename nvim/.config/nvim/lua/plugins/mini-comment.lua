@@ -9,7 +9,7 @@ return {
             },
         }
     },
-    event = "VeryLazy",
+    event = "BufReadPost",
     opts = {
         options = {
             custom_commentstring = function()
