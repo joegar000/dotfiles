@@ -148,7 +148,6 @@ return {
       })
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeavePre" }, {
         callback = function()
-          print('InsertLeavePre')
           require("lint").try_lint()
         end,
       })
