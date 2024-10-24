@@ -146,8 +146,9 @@ return {
       require('mason-nvim-lint').setup({
         ensure_installed = { "flake8", "mypy", "eslint_d", "djlint", "actionlint" },
       })
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeavePre" }, {
         callback = function()
+          print('InsertLeavePre')
           require("lint").try_lint()
         end,
       })
