@@ -72,17 +72,17 @@ return {
 
       lspconfig['jinja_lsp'].setup({
         capabilities = capabilities,
-        filetypes = { 'jinja', 'htmldjango', 'html' },
+        filetypes = { 'jinja', 'jinja.html', 'htmldjango' },
         init_options = {
-          templates = '.',
-          backend = { '.', './editors', './customers' },
+          templates = './customers/templates',
+          backend = { './customers' },
           lang = "python"
         }
       })
 
       lspconfig['html'].setup({
         capabilities = capabilities,
-        filetypes = { 'html', 'templ', 'jinja', 'htmldjango' }
+        filetypes = { 'html', 'templ', 'jinja', 'jinja.html', 'htmldjango' }
       })
 
       vim.diagnostic.config({
@@ -139,6 +139,8 @@ return {
         typescript = { "eslint_d" },
         typescriptreact = { "eslint_d" },
         htmldjango = { "djlint" },
+        jinja = { "djlint" },
+        ['jinja.html'] = { "djlint" },
         yaml = { "actionlint", "yamllint" },
         json = { "jsonlint" }
       }
