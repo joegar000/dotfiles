@@ -1,77 +1,71 @@
 return {
   "folke/noice.nvim",
   event = "VeryLazy",
-  opts = {
-    lsp = {
-      override = {
-        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-        ["vim.lsp.util.stylize_markdown"] = true,
-        ["cmp.entry.get_documentation"] = true,
-      },
-      hover = {
-        enabled = true,
-        view = "hover",
-        border = {
-          style = "rounded"
-        }
-      },
-      signature = {
-        enabled = true,
-        auto_open = {
-          enabled = false
+  config = function ()
+    vim.api.nvim_command('highlight NormalFloat guibg=#1e1e2e')
+    require('noice').setup({
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
         },
-        view = "hover",
-        border = {
-          style = "rounded"
-        }
-      },
-      documentation = {
-        view = "hover",
-        opts = { -- lsp_docs settings
-          lang = "markdown",
-          replace = true,
-          render = "plain",
-          format = { "{message}" },
-          position = { row = 2, col = 2 },
-          size = {
-            max_width = math.floor(0.8 * vim.api.nvim_win_get_width(0)),
-            max_height = 15,
-          },
+        hover = {
+          enabled = true,
+          view = "hover",
           border = {
-            style = "rounded",
+            style = "rounded"
+          }
+        },
+        signature = {
+          enabled = true,
+          auto_open = {
+            enabled = false
           },
-          win_options = {
-            concealcursor = "n",
-            conceallevel = 3,
-            winhighlight = {
-              Normal = "CmpPmenu",
-              FloatBorder = "DiagnosticSignInfo",
+          view = "hover",
+          border = {
+            style = "rounded"
+          }
+        },
+        documentation = {
+          view = "hover",
+          opts = { -- lsp_docs settings
+            lang = "markdown",
+            replace = true,
+            render = "plain",
+            format = { "{message}" },
+            position = { row = 2, col = 2 },
+            size = {
+              max_width = math.floor(0.8 * vim.api.nvim_win_get_width(0)),
+              max_height = 15,
+            },
+            border = {
+              style = "rounded",
             },
           },
-        },
-      }
-    },
-    routes = {
-      {
-        filter = {
-          event = "msg_show",
-          any = {
-            { find = "%d+L, %d+B" },
-            { find = "; after #%d+" },
-            { find = "; before #%d+" },
-          },
-        },
-        view = "mini",
+        }
       },
-    },
-    presets = {
-      bottom_search = true,
-      command_palette = true,
-      long_message_to_split = true,
-      inc_rename = true,
-    },
-  },
-  -- stylua: ignore
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { find = "%d+L, %d+B" },
+              { find = "; after #%d+" },
+              { find = "; before #%d+" },
+            },
+          },
+          view = "mini",
+        },
+      },
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+        inc_rename = true,
+      },
+    })
+  end,
   keys = {
     { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
     { "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
