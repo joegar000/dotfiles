@@ -1,6 +1,8 @@
 return {
     {
         'armyers/vim-jinja2-syntax',
-        lazy = false
+        ft = {
+            'html', 'jinja', 'jinja2', 'jinja.html', 'htmldjango', 'django'
+        }
     }
 }
