@@ -1,9 +1,26 @@
 return {
-        'nvim-lualine/lualine.nvim',
-        event = "VeryLazy",
-        main = 'lualine',
-        dependencies = {
-          'nvim-tree/nvim-web-devicons'
-        },
-        opts = {}
+    'nvim-lualine/lualine.nvim',
+    event = "VeryLazy",
+    main = 'lualine',
+    dependencies = {
+        'nvim-tree/nvim-web-devicons',
+        'mfussenegger/nvim-lint'
+    },
+    config = function ()
+        local lint_progress = function()
+            local linters = require("lint").get_running()
+            if #linters == 0 then
+                return "󰦕"
+            end
+            return "󱉶 " .. table.concat(linters, ", ")
+        end
+        require('lualine').setup({
+            refresh = {
+                statusline = 1000
+            },
+            sections = {
+                lualine_x = {lint_progress, 'encoding', 'fileformat', 'filetype'}
+            }
+        })
+    end
 }
