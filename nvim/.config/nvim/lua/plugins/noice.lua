@@ -13,6 +13,7 @@ return {
       }
     })
     vim.api.nvim_command('highlight! link NormalFloat Normal')
+    vim.api.nvim_command('highlight! link NvimTreeNormal Normal')
     require('noice').setup({
       lsp = {
         override = {
