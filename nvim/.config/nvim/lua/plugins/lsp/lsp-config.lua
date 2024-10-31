@@ -84,13 +84,6 @@ return {
         capabilities = capabilities,
         filetypes = { 'html', 'templ', 'jinja', 'jinja.html', 'htmldjango' }
       })
-
-      vim.diagnostic.config({
-        virtual_text = false,
-        float = {
-          border = 'rounded'
-        }
-      })
     end,
     keys = {
       { 'K',           vim.lsp.buf.hover,                                                                      desc = 'Hover' },

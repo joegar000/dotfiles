@@ -1,7 +1,17 @@
 return {
   "folke/noice.nvim",
+  dependencies = {
+    'MunifTanjim/nui.nvim',
+    "rcarriga/nvim-notify"
+  },
   event = "VeryLazy",
   config = function ()
+    vim.diagnostic.config({
+      virtual_text = false,
+      float = {
+        border = 'rounded'
+      }
+    })
     vim.api.nvim_command('highlight! link NormalFloat Normal')
     require('noice').setup({
       lsp = {
@@ -59,7 +69,7 @@ return {
         },
       },
       presets = {
-        bottom_search = true,
+        bottom_search = false,
         command_palette = true,
         long_message_to_split = true,
         inc_rename = true,
@@ -75,10 +85,4 @@ return {
     { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
     { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
   },
-  dependencies = {
-    {
-      'MunifTanjim/nui.nvim',
-      "rcarriga/nvim-notify"
-    }
-  }
 }
