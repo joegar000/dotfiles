@@ -2,7 +2,7 @@ return {
   "folke/noice.nvim",
   event = "VeryLazy",
   config = function ()
-    vim.api.nvim_command('highlight NormalFloat guibg=#1e1e2e')
+    vim.api.nvim_command('highlight! link NormalFloat Normal')
     require('noice').setup({
       lsp = {
         override = {
