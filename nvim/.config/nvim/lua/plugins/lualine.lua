@@ -15,6 +15,11 @@ return {
             return "󱉶 " .. table.concat(linters, ", ")
         end
         require('lualine').setup({
+            options = {
+                -- component_separators = { left = '┃', right = '┃'},
+                component_separators = '',
+                section_separators = { left = '', right = '' },
+            },
             refresh = {
                 statusline = 1000
             },

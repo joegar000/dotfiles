@@ -11,6 +11,11 @@ return {
     { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
   },
   opts = {
+    highlights = {
+      fill = {
+        bg = '#1e1e2e' -- matches catppuccin
+      }
+    },
     options = {
       -- stylua: ignore
       close_command = function(n) require("mini.bufremove").delete(n, false) end,
