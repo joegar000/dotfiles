@@ -18,7 +18,8 @@ return {
             options = {
                 -- component_separators = { left = '┃', right = '┃'},
                 component_separators = '',
-                section_separators = { left = '', right = '' },
+                -- section_separators = { left = '', right = '' },
+                section_separators = { left = '', right = '' },
             },
             refresh = {
                 statusline = 1000
