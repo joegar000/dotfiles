@@ -34,12 +34,20 @@ return {
           ['<C-y>'] = cmp.mapping.confirm({ select = true }),
           ['<C-Space>'] = cmp.mapping.complete(),
         }),
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-        }, {
-          { name = 'buffer' }
-        })
+        sources = cmp.config.sources(
+          {
+            {
+              name = 'nvim_lsp',
+              entry_filter = function(entry, ctx)
+                return require("cmp").lsp.CompletionItemKind.Text ~= entry:get_kind()
+              end
+            },
+            { name = 'luasnip' },
+          },
+          {
+            { name = 'buffer' }
+          }
+        )
       })
     end
   }
