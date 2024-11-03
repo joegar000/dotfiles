@@ -3,7 +3,6 @@ local HEIGHT_RATIO = 0.8
 return {
     'nvim-tree/nvim-tree.lua',
     keys = { { '<leader>e', '<cmd>NvimTreeFindFileToggle<CR>', desc = 'Open file explorer' } },
-    lazy = false,
     config = function()
         local _setup, nvimtree = pcall(require, "nvim-tree")
 

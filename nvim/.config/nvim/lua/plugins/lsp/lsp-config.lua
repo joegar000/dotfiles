@@ -1,7 +1,6 @@
 return {
   {
     'williamboman/mason.nvim',
-    lazy = false,
     keys = {
       { '<leader>m', '<cmd>Mason<CR>', desc = 'Open Mason' }
     },
@@ -14,13 +13,11 @@ return {
     end
   },
   {
-    'williamboman/mason-lspconfig.nvim'
-  },
-  {
     "neovim/nvim-lspconfig",
     cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
+      'williamboman/mason-lspconfig.nvim',
       'folke/neodev.nvim',
     },
     lazy = false,
@@ -120,6 +117,7 @@ return {
   },
   {
     "rshkarin/mason-nvim-lint",
+    event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
       "williamboman/mason.nvim",
       "mfussenegger/nvim-lint"
