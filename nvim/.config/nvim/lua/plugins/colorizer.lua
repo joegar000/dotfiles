@@ -19,6 +19,10 @@ return {
       jinja = {
         names = true,
         css_fn = true
+      },
+      ['jinja.html'] = {
+        names = true,
+        css_fn = true
       }
     },
     user_default_options = {

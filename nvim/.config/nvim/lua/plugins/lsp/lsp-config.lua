@@ -124,7 +124,7 @@ return {
     },
     config = function()
       require('lint').linters_by_ft = {
-        python = { "flake8", "mypy" },
+        python = { "flake8" },
         javascript = { "eslint_d" },
         javascriptreact = { "eslint_d" },
         typescript = { "eslint_d" },
@@ -137,7 +137,7 @@ return {
       }
 
       require('mason-nvim-lint').setup({
-        ensure_installed = { "flake8", "mypy", "eslint_d", "djlint", "actionlint" },
+        ensure_installed = { "flake8", "eslint_d", "djlint", "actionlint" },
       })
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeavePre" }, {
         callback = function()
