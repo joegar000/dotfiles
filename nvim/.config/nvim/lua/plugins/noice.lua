@@ -1,5 +1,6 @@
 return {
   "folke/noice.nvim",
+  commit = "df448c649ef6bc5a6a633a44f2ad0ed8d4442499",
   dependencies = {
     'MunifTanjim/nui.nvim',
     "rcarriga/nvim-notify"
