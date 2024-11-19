@@ -7,7 +7,9 @@ return {
     config = function()
       require('mason').setup({
         ui = {
-          border = 'rounded'
+          border = 'rounded',
+          width = 0.8,
+          height = 0.8
         }
       })
     end
@@ -79,7 +81,7 @@ return {
 
       lspconfig['html'].setup({
         capabilities = capabilities,
-        filetypes = { 'html', 'templ', 'jinja', 'jinja.html', 'htmldjango' }
+        filetypes = { 'html', 'tpl', 'jinja', 'jinja.html', 'htmldjango' }
       })
     end,
     keys = {

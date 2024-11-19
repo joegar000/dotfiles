@@ -1,5 +1,6 @@
 return {
     'mbbill/undotree',
+    event = "VeryLazy",
     keys = { { '<leader>ut', vim.cmd.UndotreeToggle, desc = 'Toggle Undotree' } },
     config = function ()
         vim.opt.swapfile = false
