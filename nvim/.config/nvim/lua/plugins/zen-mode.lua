@@ -15,7 +15,7 @@ return {
       tmux = { enabled = false },
       options = {
         enabled = true,
-        laststatus = 3
+        laststatus = 0
       }
     },
     on_open = function(win)

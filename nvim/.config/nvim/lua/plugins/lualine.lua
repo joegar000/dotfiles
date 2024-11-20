@@ -28,5 +28,6 @@ return {
                 lualine_x = {lint_progress, 'encoding', 'fileformat', 'filetype'}
             }
         })
+        vim.o.laststatus = 3
     end
 }
