@@ -1,7 +1,8 @@
 return {
   'folke/zen-mode.nvim',
   keys = {
-    { '<C-W>z', '<cmd>ZenMode<cr>', desc = "Toggle zen mode" }
+    { '<C-W>z', '<cmd>ZenMode<cr>', desc = "Toggle zen mode" },
+    { '<leader>z', '<cmd>ZenMode<cr>', desc = "Toggle zen mode" }
   },
   opts = {
     window = {
@@ -10,7 +11,8 @@ return {
       height = 1,
     },
     plugins = {
-      tmux = { enabled = true }
+      -- Would use but it automatically minimizes pane when exiting zen mode, even if pane started zoomed
+      tmux = { enabled = false }
     }
   }
 }
