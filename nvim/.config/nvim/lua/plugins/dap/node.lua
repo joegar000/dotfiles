@@ -1,3 +1,5 @@
+local get_args = require('utils').get_args
+
 return {
     {
         'mxsdev/nvim-dap-vscode-js',
@@ -40,18 +42,19 @@ return {
                         type = "pwa-node",
                         name = "Launch File Tests (pwa-node with jest)",
                         request = "launch",
-                        args = {
-                            "run",
-                            "test",
-                            "--",
-                            "test",
-                            "--runInBand",
-                            "--watchAll=false",
-                            -- -- "--testNamePattern",
-                            -- -- "${jest.testNamePattern}",
-                            "--runTestsByPath",
-                            "${file}"
-                        },
+                        args = function ()
+                            local watch = string.lower(vim.fn.input('Watch? (y/[n])') or 'n')
+                            watch = watch == 'y' and '--watchAll=true' or '--watchAll=false'
+                            return {
+                                "run",
+                                "test",
+                                "--",
+                                "--runInBand",
+                                watch,
+                                "--runTestsByPath",
+                                "${file}"
+                            }
+                        end,
                         cwd = vim.fn.getcwd(),
                         console = "integratedTerminal",
                         internalConsoleOptions = "neverOpen",

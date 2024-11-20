@@ -17,8 +17,8 @@ return {
       "<C-W>f",
       function()
         local buf = vim.api.nvim_get_current_buf() -- Get the current buffer
-        local width = math.floor(vim.o.columns * 0.8) -- 80% of the screen width
-        local height = math.floor(vim.o.lines * 0.8)  -- 80% of the screen height
+        local width = math.floor(vim.o.columns * 0.9) -- 90% of the screen width
+        local height = math.floor(vim.o.lines * 0.9)  -- 90% of the screen height
         local row = math.floor((vim.o.lines - height) / 2) -- Center vertically
         local col = math.floor((vim.o.columns - width) / 2) -- Center horizontally
 

@@ -25,7 +25,7 @@ return {
     { '<leader>do', function() require('dap').step_out() end, desc = 'Step Out' },
     { '<leader>di', function() require('dap').step_into() end, desc = 'Step Into' },
     { '<leader>db', function() require('dap').toggle_breakpoint() end, desc = 'Toggle Breakpoint' },
-    { '<leader>dh', function() require('dap.ui.widgets').hover() end, desc = 'Hover' },
+    { '<leader>dh', function() require('dapui').eval() end, desc = 'Hover' },
     { '<leader>dv', function() require('dap.ui.widgets').preview() end, desc = 'Preview' },
   },
   opts = {
@@ -47,7 +47,7 @@ return {
     element_mappings = {},
     expand_lines = true,
     floating = {
-      border = "single",
+      border = "rounded",
       mappings = {
         close = { "q", "<Esc>" }
       }
@@ -128,7 +128,9 @@ return {
     --   },
     -- }
     vim.cmd("hi DapBreakpointColor guifg=#fa4848")
+    vim.cmd("hi DapStoppedColor guifg=#fa4848")
     -- vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
     vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
+    vim.fn.sign_define("DapStopped", { text = "→", texthl = "DapStoppedColor" })
   end
 }

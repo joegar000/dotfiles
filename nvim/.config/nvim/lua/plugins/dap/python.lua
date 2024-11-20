@@ -1,7 +1,4 @@
-local function get_args()
-  local args_string = vim.fn.input('Arguments: ')
-  return vim.split(args_string, " +")
-end
+local get_args = require('utils').get_args
 
 -- Run Python app with `python -m debugpy [--wait-for-client] --listen 0.0.0.0:5678 -m 'regular_run_command'`
 return {
@@ -30,18 +27,5 @@ return {
       --   "run", "-h", "0.0.0.0", "-p", "8087", "--cert=adhoc", "--debug"
       -- }
     })
-
-    -- table.insert(dap.configurations.python, {
-    --   name = "Launch Flask Server (External Terminal)",
-    --   type = "python",
-    --   request = "launch",
-    --   console = "externalTerminal",
-    --   module = "flask",
-    --   justMyCode = false,
-    --   args = get_args
-    --   -- args = {
-    --   --   "run", "-h", "0.0.0.0", "-p", "8087", "--cert=adhoc", "--debug"
-    --   -- }
-    -- })
   end
 }
