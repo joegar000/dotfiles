@@ -8,6 +8,7 @@ return {
     config = function(opts)
         require('catppuccin').setup(opts)
         require('catppuccin').load()
+        vim.cmd(":hi LineNr guibg=none guifg=#a6adc8")
     end
 }
 -- return {
