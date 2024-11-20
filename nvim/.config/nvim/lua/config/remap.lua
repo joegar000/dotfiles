@@ -3,7 +3,7 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Keeps cursor in same position when appending lines to current lines when using J
--- vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "<S-Down>", "mzJ`z")
 
 -- local map = vim.keymap.set
 -- if os.getenv("TMUX") then
@@ -30,3 +30,5 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- Don't know why, but primeagen doesn't like capital q
 vim.keymap.set("n", "Q", "<nop>")
 
+-- Use s
+vim.api.nvim_set_keymap('t', '<ESC>', '<C-\\><C-n>', { noremap = true })
