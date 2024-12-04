@@ -1,1 +1,4 @@
-frame = "transparent"
+fork = true
+srgb = true
+title-hidden = true
+frame = "full"
