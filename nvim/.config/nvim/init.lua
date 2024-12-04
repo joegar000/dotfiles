@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 IsWindows = package.config:sub(1,1) == '\\'
 InNeovide = vim.g.neovide
+InVSCode = vim.g.vscode
 
 if not IsWindows then
   vim.g.neovide_transparency = 0.9
