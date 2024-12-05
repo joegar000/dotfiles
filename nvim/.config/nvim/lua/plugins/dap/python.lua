@@ -1,17 +1,18 @@
+-- These links are from the debugpy repo. They can help you get started.
+-- CLI reference: https://github.com/microsoft/debugpy/wiki/Command-Line-Reference
+-- Config reference: https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
+--
+-- Run Python app with `python -m debugpy [--wait-for-client] --listen 0.0.0.0:5678 -m 'regular_run_command'`
+
 local get_args = require('utils').get_args
 
--- Run Python app with `python -m debugpy [--wait-for-client] --listen 0.0.0.0:5678 -m 'regular_run_command'`
 return {
-  -- https://github.com/mfussenegger/nvim-dap-python
   'mfussenegger/nvim-dap-python',
   ft = 'python',
   dependencies = {
-    -- https://github.com/mfussenegger/nvim-dap
     'mfussenegger/nvim-dap',
   },
   config = function ()
-    -- Update the path passed to setup to point to your system or virtual env python binary
-    -- local path = vim.fn.exepath('python')
     require('dap-python').setup('python')
     local dap = require('dap')
 
@@ -22,6 +23,10 @@ return {
       console = "integratedTerminal",
       module = "flask",
       justMyCode = false,
+      env = function ()
+        local path = vim.fn.input('Path to .env')
+        return path ~= '' and require('utils').parse_env_file(path) or nil
+      end,
       args = get_args
       -- args = {
       --   "run", "-h", "0.0.0.0", "-p", "8087", "--cert=adhoc", "--debug"
