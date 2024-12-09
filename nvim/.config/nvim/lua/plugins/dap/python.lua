@@ -17,6 +17,17 @@ return {
     local dap = require('dap')
 
     table.insert(dap.configurations.python, {
+      name = "Pytest: Current File",
+      type = "python",
+      request = "launch",
+      module = "pytest",
+      args = {
+        "${file}"
+      },
+      console = "integratedTerminal"
+    })
+
+    table.insert(dap.configurations.python, {
       name = "Launch Flask Server",
       type = "python",
       request = "launch",
