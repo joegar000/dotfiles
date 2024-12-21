@@ -1,6 +1,7 @@
 return {
   "stevearc/dressing.nvim",
   opts = {},
+  cond = not InVSCode
   -- DELETE THE FOLLOWING IF YOU'RE SATISFIED WITH THE SIMPLER ABOVE CONFIG
   -- lazy = true,
   -- init = function()

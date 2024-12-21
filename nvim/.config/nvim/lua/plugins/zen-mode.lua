@@ -33,5 +33,6 @@ return {
         relative = "editor",
       })
     end,
-  }
+  },
+  cond = not InVSCode
 }

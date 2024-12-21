@@ -46,4 +46,5 @@ return {
     })
     wk.register(opts.defaults)
   end,
+  cond = not InVSCode
 }

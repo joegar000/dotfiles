@@ -12,7 +12,8 @@ return {
           height = 0.8
         }
       })
-    end
+    end,
+    cond = not InVSCode
   },
   {
     "neovim/nvim-lspconfig",
@@ -116,6 +117,7 @@ return {
         desc = "Source Action",
       },
     },
+    cond = not InVSCode
   },
   {
     "rshkarin/mason-nvim-lint",
@@ -146,7 +148,8 @@ return {
           require("lint").try_lint()
         end,
       })
-    end
+    end,
+    cond = not InVSCode
   },
   {
     "zapling/mason-conform.nvim",
@@ -178,7 +181,8 @@ return {
     end,
     keys = {
       { '<leader>gf', function() require('conform').format() end, desc = 'Format' },
-    }
+    },
+    cond = not InVSCode
   }
   -- {
   --   "jay-babu/mason-null-ls.nvim",
@@ -206,5 +210,6 @@ return {
   --       }
   --     })
   --   end,
+  --   cond = not InVSCode
   -- },
 }

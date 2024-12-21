@@ -75,5 +75,6 @@ return {
                 },
             },
         }
-    }
+    },
+    cond = not InVSCode
 }

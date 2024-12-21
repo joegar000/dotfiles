@@ -10,7 +10,8 @@ return {
         require('catppuccin').load()
         vim.cmd(":hi LineNr guibg=none guifg=#a6adc8")
         -- vim.cmd("highlight WinSeparator guifg=#89b4fa")
-    end
+    end,
+    cond = not InVSCode
 }
 -- return {
 --     'linrongbin16/colorbox.nvim',

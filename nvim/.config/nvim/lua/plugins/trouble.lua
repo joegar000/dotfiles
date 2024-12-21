@@ -48,7 +48,8 @@ return {
         }
       }
     }
-  }
+  },
+  cond = not InVSCode
 }
 
 

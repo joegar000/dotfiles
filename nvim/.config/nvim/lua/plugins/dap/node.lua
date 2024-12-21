@@ -85,7 +85,8 @@ return {
                     },
                 }
             end
-        end
+        end,
+        cond = not InVSCode
     },
     {
         'David-Kunz/jester',
@@ -111,6 +112,7 @@ return {
                 protocol = "inspector",
                 sourceMaps = true
             }
-        }
+        },
+        cond = not InVsCode
     }
 }

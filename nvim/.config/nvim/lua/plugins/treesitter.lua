@@ -12,5 +12,6 @@ return {
                 enable = true
             }
         })
-    end
+    end,
+    cond = not InVSCode
 }

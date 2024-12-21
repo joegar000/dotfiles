@@ -14,4 +14,5 @@ return {
     { "<C-l>", "<cmd>TmuxNavigateRight<cr>" },
     { "<C-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
   },
+  cond = not InVSCode
 }

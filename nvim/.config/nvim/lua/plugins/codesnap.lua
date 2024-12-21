@@ -14,5 +14,6 @@ return {
     bg_y_padding = 1,
     bg_color = "#292D34",
     has_line_number = true
-  }
+  },
+  cond = not InVSCode
 }

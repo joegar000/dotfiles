@@ -1,13 +1,15 @@
 return {
   {
-    'hrsh7th/cmp-nvim-lsp'
+    'hrsh7th/cmp-nvim-lsp',
+    cond = not InVSCode
   },
   {
     'L3MON4D3/LuaSnip',
     dependencies = {
       'saadparwaiz1/cmp_luasnip',
       'rafamadriz/friendly-snippets'
-    }
+    },
+    cond = not InVSCode
   },
   {
     'hrsh7th/nvim-cmp',
@@ -49,6 +51,7 @@ return {
           }
         )
       })
-    end
+    end,
+    cond = not InVSCode
   }
 }

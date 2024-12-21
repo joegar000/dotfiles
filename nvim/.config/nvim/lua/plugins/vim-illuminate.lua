@@ -33,4 +33,5 @@ return {
     { "]]", desc = "Next Reference" },
     { "[[", desc = "Prev Reference" },
   },
+  cond = not InVSCode
 }

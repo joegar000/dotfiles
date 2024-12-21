@@ -60,5 +60,6 @@ return {
         }
       }
     }
-  }
+  },
+  cond = not InVSCode
 }

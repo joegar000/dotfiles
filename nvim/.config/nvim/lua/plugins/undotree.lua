@@ -7,5 +7,6 @@ return {
         vim.opt.backup = false
         vim.opt.undodir = (os.getenv('HOME') or (os.getenv('HOMEDRIVE')) .. os.getenv('HOMEPATH')) .. "/.vim/undodir"
         vim.opt.undofile = true
-    end
+    end,
+    cond = not InVSCode
 }

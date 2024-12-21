@@ -6,5 +6,6 @@ return {
         require('guess-indent').setup({
             filetype_exclude = { "dashboard", "NvimTree", "lazy", "mason", "netrw" }
         })
-    end
+    end,
+    cond = not InVSCode
 }

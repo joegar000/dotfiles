@@ -3,5 +3,5 @@ return {
     config = function()
         require('mini.animate').setup()
     end,
-    cond = not InNeovide
+    cond = not InNeovide and not InVSCode
 }

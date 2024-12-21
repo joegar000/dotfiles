@@ -34,6 +34,7 @@ return {
       always_update = true
     },
     buftypes = {},
-  }
+  },
+  cond = not InVSCode
 }
 

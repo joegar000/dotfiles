@@ -6,5 +6,6 @@ return {
   opts = {
     virt_text_pos = 'eol',
     clear_on_continue = true
-  }
+  },
+  cond = not InVSCode
 }

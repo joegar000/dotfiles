@@ -43,5 +43,6 @@ return {
       --   "run", "-h", "0.0.0.0", "-p", "8087", "--cert=adhoc", "--debug"
       -- }
     })
-  end
+  end,
+  cond = not InVSCode
 }

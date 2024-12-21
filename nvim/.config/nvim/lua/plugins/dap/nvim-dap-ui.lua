@@ -132,5 +132,6 @@ return {
     -- vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
     vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "DapBreakpointColor", linehl = "", numhl = "" })
     vim.fn.sign_define("DapStopped", { text = "→", texthl = "DapStoppedColor" })
-  end
+  end,
+  cond = not InVSCode
 }

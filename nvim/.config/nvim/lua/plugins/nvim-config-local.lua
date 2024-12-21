@@ -15,5 +15,6 @@ return {
       silent = false,             -- Disable plugin messages (Config loaded/ignored)
       lookup_parents = false,     -- Lookup config files in parent directories
     }
-  end
+  end,
+  cond = not InVSCode
 }

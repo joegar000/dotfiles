@@ -18,14 +18,17 @@ return {
                 callback = correct_ft
             })
             correct_ft()
-        end
+        end,
+        cond = not InVSCode
     },
     {
         'armyers/vim-jinja2-syntax', -- the plugin is running and taking over when smarty.vim should
         ft = { 'html', 'jinja', 'jinaj2', 'jinja.html', 'htmldjango', 'django' },
+        cond = not InVSCode
     },
     {
         'blueyed/smarty.vim',
-        ft = { 'tpl' }
+        ft = { 'tpl' },
+        cond = not InVSCode
     }
 }

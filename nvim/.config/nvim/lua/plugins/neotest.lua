@@ -27,5 +27,6 @@ return {
             }
         })
         require('neotest').setup(opts)
-    end
+    end,
+    cond = not InVSCode
 }

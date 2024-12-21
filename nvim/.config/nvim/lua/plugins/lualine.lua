@@ -29,5 +29,6 @@ return {
             }
         })
         vim.o.laststatus = 3
-    end
+    end,
+    cond = not InVSCode
 }

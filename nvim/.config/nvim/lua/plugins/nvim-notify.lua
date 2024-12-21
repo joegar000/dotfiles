@@ -26,7 +26,8 @@ return {
   },
   init = function()
     vim.notify = require("notify")
-  end
+  end,
+  cond = not InVSCode
 }
 
 
