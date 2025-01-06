@@ -1,4 +1,5 @@
 alias lg="lazygit"
+alias gs="git status"
 
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
