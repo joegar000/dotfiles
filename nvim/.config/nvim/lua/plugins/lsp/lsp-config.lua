@@ -70,15 +70,16 @@ return {
         }
       })
 
-      lspconfig['jinja_lsp'].setup({
-        capabilities = capabilities,
-        filetypes = { 'jinja', 'jinja.html', 'htmldjango' },
-        init_options = {
-          templates = './customers/templates',
-          backend = { './customers' },
-          lang = "python"
-        }
-      })
+      -- Since jinja_lsp only takes a single configuration. It is best to set this up in .nvim.lua
+      -- lspconfig['jinja_lsp'].setup({
+      --   capabilities = capabilities,
+      --   filetypes = { 'jinja', 'jinja.html', 'htmldjango' },
+      --   init_options = {
+      --     templates = './src/templates',
+      --     backend = { './src' },
+      --     lang = "python"
+      --   }
+      -- })
 
       lspconfig['html'].setup({
         capabilities = capabilities,
