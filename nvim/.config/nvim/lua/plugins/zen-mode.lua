@@ -2,7 +2,7 @@ return {
   'folke/zen-mode.nvim',
   keys = {
     { '<C-W>z', '<cmd>ZenMode<cr>', desc = "Toggle zen mode" },
-    { '<leader>z', '<cmd>ZenMode<cr>', desc = "Toggle zen mode" }
+    -- { '<leader>z', '<cmd>ZenMode<cr>', desc = "Toggle zen mode" } -- Conflicts with folding
   },
   opts = {
     window = {
