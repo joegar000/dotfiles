@@ -16,8 +16,9 @@ InNeovide = vim.g.neovide
 InVSCode = vim.g.vscode
 
 if not IsWindows then
-  vim.g.neovide_transparency = 0.9
-  vim.g.neovide_window_blurred = true
+  -- vim.g.neovide_transparency = 0.9
+  -- vim.g.neovide_window_blurred = false
+  vim.g.neovide_show_border = true
 end
 
 vim.g.mapleader = " "

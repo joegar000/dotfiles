@@ -1,4 +1,8 @@
 fork = true
 srgb = true
 title-hidden = true
-frame = "full"
+frame = "buttonless"
+
+[font]
+normal = ["MesloLGS Nerd Font Mono"]
+size = 16
