@@ -22,6 +22,7 @@ return {
     dependencies = {
       'williamboman/mason-lspconfig.nvim',
       'folke/neodev.nvim',
+      'hrsh7th/cmp-nvim-lsp'
     },
     lazy = false,
     config = function()

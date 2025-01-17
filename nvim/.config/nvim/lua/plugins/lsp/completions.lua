@@ -1,18 +1,27 @@
 return {
   {
-    'hrsh7th/cmp-nvim-lsp',
-    cond = not InVSCode
-  },
-  {
-    'L3MON4D3/LuaSnip',
-    dependencies = {
-      'saadparwaiz1/cmp_luasnip',
-      'rafamadriz/friendly-snippets'
-    },
-    cond = not InVSCode
-  },
-  {
     'hrsh7th/nvim-cmp',
+    dependencies = {
+      { 'hrsh7th/cmp-buffer' },
+      { 'onsails/lspkind.nvim' },
+      {
+        'L3MON4D3/LuaSnip',
+        dependencies = {
+          'saadparwaiz1/cmp_luasnip',
+          'rafamadriz/friendly-snippets'
+        }
+      },
+      {
+        'zbirenbaum/copilot-cmp',
+        dependencies = {
+          'zbirenbaum/copilot.lua'
+        },
+        enabled = false,
+        config = function ()
+          require('copilot_cmp').setup()
+        end
+      }
+    },
     event = 'InsertEnter',
     config = function()
       local cmp = require('cmp')
@@ -29,8 +38,8 @@ return {
           documentation = cmp.config.window.bordered(),
         },
         mapping = cmp.mapping.preset.insert({
-          ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }), {'i','c'}),
+          ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }), {'i','c'}),
           ['<C-u>'] = cmp.mapping.scroll_docs(-4),
           ['<C-d>'] = cmp.mapping.scroll_docs(4),
           ['<C-y>'] = cmp.mapping.confirm({ select = true }),
@@ -45,11 +54,20 @@ return {
               end
             },
             { name = 'luasnip' },
-          },
-          {
-            { name = 'buffer' }
+            { name = 'copilot' }
+          }, {
+            { name = 'buffer' } -- TODO: SILL NOT WORKING
           }
-        )
+        ),
+        formatting = {
+          format = require('lspkind').cmp_format({
+            mode = 'symbol',
+            max_width = 50,
+            symbol_map = {
+              Copilot = ''
+            }
+          })
+        }
       })
     end,
     cond = not InVSCode
