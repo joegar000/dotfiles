@@ -3,5 +3,6 @@ return {
     config = function()
         require('mini.animate').setup()
     end,
+    enabled = false,
     cond = not InNeovide and not InVSCode
 }
