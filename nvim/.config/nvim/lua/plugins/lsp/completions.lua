@@ -16,7 +16,7 @@ return {
         dependencies = {
           'zbirenbaum/copilot.lua'
         },
-        enabled = false,
+        enabled = true,
         config = function ()
           require('copilot_cmp').setup()
         end
