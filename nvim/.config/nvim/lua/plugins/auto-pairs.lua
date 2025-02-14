@@ -22,5 +22,6 @@ return {
     vim.g.AutoPairsShortcutFastWrap = ''
     vim.g.AutoPairsShortcutJump = ''
     vim.g.AutoPairsShortcutBackInsert = ''
+    vim.g.AutoPairsCenterLine = 0
   end
 }
