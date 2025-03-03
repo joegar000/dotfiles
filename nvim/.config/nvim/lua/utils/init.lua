@@ -33,9 +33,22 @@ local function parse_env_file(filePath)
     return envTable
 end
 
+--- Gets a path to a package in the Mason registry.
+--- Prefer this to `get_package`, since the package might not always be
+--- available yet and trigger errors.
+---@param pkg string
+---@param path? string
+local function get_pkg_path(pkg, path)
+  pcall(require, 'mason')
+  local root = vim.env.MASON or (vim.fn.stdpath('data') .. '/mason')
+  path = path or ''
+  local ret = root .. '/packages/' .. pkg .. '/' .. path
+  return ret
+end
 
 return {
-  get_args = get_args,
-  parse_env_file = parse_env_file
+    get_args = get_args,
+    parse_env_file = parse_env_file,
+    get_pkg_path = get_pkg_path
 }
 
