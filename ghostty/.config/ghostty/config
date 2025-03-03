@@ -3,7 +3,7 @@ theme = catppuccin-mocha
 
 font-family = "MesloLGS Nerd Font Mono"
 font-thicken
-font-thicken-strength = 200
+font-thicken-strength = 150
 font-size = 16
 
 cursor-style = block
