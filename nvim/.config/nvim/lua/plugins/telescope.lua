@@ -17,7 +17,7 @@ return {
     },
     keys = {
         { '<leader>tf', "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' } })<CR>", desc = 'Find files' },
-        { '<leader>tb', "<cmd>lua require'telescope.builtin'.buffers({ show_all_buffers = true })<CR>", desc = 'Show all buffers' },
+        { '<leader>bl', "<cmd>lua require'telescope.builtin'.buffers({ show_all_buffers = true })<CR>", desc = 'Show all buffers' },
         { '<leader>tg', '<cmd>Telescope git_files<CR>', desc = 'Git files' },
         { '<leader>tlg', '<cmd>Telescope live_grep<CR>', desc = 'Live grep' },
         { '<leader>tk', '<cmd>Telescope keymaps<CR>', desc = 'Keymaps' },
