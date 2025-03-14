@@ -1,6 +1,7 @@
 alias lg="lazygit"
 alias lzg="lazygit"
 alias lzd="lazydocker"
+alias lzs="lazysql"
 alias gs="git status"
 alias c="clear"
 
