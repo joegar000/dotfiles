@@ -1,5 +1,5 @@
 term = "xterm-256color"
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 
 font-family = "MesloLGS Nerd Font Mono"
 font-thicken
