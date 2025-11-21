@@ -112,9 +112,9 @@ function cycleScreen(dir)
     win:move(win:frame():toUnitRect(screen:frame()), dir == 'left' and screen:previous() or screen:next(), true):centerOnScreen()
 end
 
-hs.hotkey.bind({'alt', 'cmd'}, 'right', function() cycleScreen('left') end)
+hs.hotkey.bind({'alt', 'cmd'}, 'right', function() cycleScreen('right') end)
 
-hs.hotkey.bind({'alt', 'cmd'}, 'left', function() cycleScreen('right') end)
+hs.hotkey.bind({'alt', 'cmd'}, 'left', function() cycleScreen('left') end)
 
 -- half of screen
 -- {frame.x, frame.y, window.w, window.h}
