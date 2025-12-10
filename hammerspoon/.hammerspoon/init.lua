@@ -126,6 +126,7 @@ function moveToNextMonitor(win, dir)
     -- compute the unitRect of the focused window relative to the current screen
     -- and move the window to the next screen setting the same unitRect 
     win:move(win:frame():toUnitRect(screen:frame()), dir == 'left' and screen:previous() or screen:next(), true):centerOnScreen()
+    center(win)
 end
 
 -------------------------------------------------
@@ -135,9 +136,9 @@ end
 local mash = {"ctrl", "alt", "cmd"}
 
 -- Fullscreen, small fullscreen, center
-hs.hotkey.bind({'alt'}, "m", function() fullscreen(hs.window.focusedWindow()) end)
-hs.hotkey.bind({'alt'}, "n", function() smallFullscreen(hs.window.focusedWindow()) end)
-hs.hotkey.bind({'ctrl', 'alt'}, "c", function() center(hs.window.focusedWindow()) end)
+hs.hotkey.bind(mash, "f", function() fullscreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind(mash, "m", function() smallFullscreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind(mash, "c", function() center(hs.window.focusedWindow()) end)
 
 -- Splits
 hs.hotkey.bind(mash, "h", function() leftHalf(hs.window.focusedWindow()) end)
@@ -146,12 +147,12 @@ hs.hotkey.bind(mash, "k", function() topHalf(hs.window.focusedWindow()) end)
 hs.hotkey.bind(mash, "j", function() bottomHalf(hs.window.focusedWindow()) end)
 
 -- Quarter grid (2×2)
-hs.hotkey.bind(mash, "u", function() grid(hs.window.focusedWindow(), 0, 0, 1, 1) end)
-hs.hotkey.bind(mash, "i", function() grid(hs.window.focusedWindow(), 1, 0, 1, 1) end)
-hs.hotkey.bind(mash, "o", function() grid(hs.window.focusedWindow(), 0, 1, 1, 1) end)
-hs.hotkey.bind(mash, "p", function() grid(hs.window.focusedWindow(), 1, 1, 1, 1) end)
+hs.hotkey.bind(mash, "y", function() grid(hs.window.focusedWindow(), 0, 0, 1, 1) end)
+hs.hotkey.bind(mash, "u", function() grid(hs.window.focusedWindow(), 1, 0, 1, 1) end)
+hs.hotkey.bind(mash, "i", function() grid(hs.window.focusedWindow(), 0, 1, 1, 1) end)
+hs.hotkey.bind(mash, "o", function() grid(hs.window.focusedWindow(), 1, 1, 1, 1) end)
 
 -- Move window to next monitor
-hs.hotkey.bind({'alt', 'cmd'}, "right", function() moveToNextMonitor(hs.window.focusedWindow(), 'right') end)
-hs.hotkey.bind({'alt', 'cmd'}, "left", function() moveToNextMonitor(hs.window.focusedWindow(), 'left') end)
+hs.hotkey.bind(mash, "right", function() moveToNextMonitor(hs.window.focusedWindow(), 'right') end)
+hs.hotkey.bind(mash, "left", function() moveToNextMonitor(hs.window.focusedWindow(), 'left') end)
 
