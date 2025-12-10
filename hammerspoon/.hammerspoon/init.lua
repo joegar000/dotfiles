@@ -1,110 +1,126 @@
 require("hs.ipc")
 
-function maximizeWithPercentPadding(percent, duration)
-    local win = hs.window.focusedWindow()
-    percent = percent / 100
-    duration = duration or 0.15
+-------------------------------------------------
+-- CONFIGURATION
+-------------------------------------------------
 
-    local screen = win:screen()
-    local f = screen:frame()   -- usable area (no menubar)
+local padding = 10             -- per-window padding
+local animationDuration = 0.12
 
-    -- padding in pixels, derived from usable area
-    local padX = f.w * percent
-    local padY = f.h * percent
+hs.window.animationDuration = animationDuration
 
-    -- final rect inside usable frame
-    local rect = hs.geometry.rect(
-        f.x + padX,
-        f.y + padY,
-        f.w - padX * 2,
-        f.h - padY * 2
-    )
+-------------------------------------------------
+-- HELPERS
+-------------------------------------------------
 
-    win:move(rect, duration)
+-- Just return the full screen frame; all padding is applied per-window
+local function screenFrame(screen)
+    return screen:frame()
 end
 
-function moveWindowHalfWithPadding(direction, percent, duration)
-    local win = hs.window.focusedWindow()
-    duration = duration or 0.15
-    percent = percent / 100
-
-    local f = win:screen():frame()  -- usable screen area
-
-    -- Apply uniform padding
-    local padX = f.w * percent
-    local padY = f.h * percent
-    local insetFrame = hs.geometry.rect(
-        f.x + padX,
-        f.y + padY,
-        f.w - padX * 2,
-        f.h - padY * 2
-    )
-
-    local x, y, w, h = insetFrame.x, insetFrame.y, insetFrame.w, insetFrame.h
-
-    if direction == "left" then
-        w = w / 2 - padX
-    elseif direction == "right" then
-        x = x + w / 2 + padX
-        w = w / 2 - padX
-    elseif direction == "up" then
-        h = h / 2 - padY
-    elseif direction == "down" then
-        y = y + h / 2 + padY
-        h = h / 2 - padY
-    end
-
-    local rect = hs.geometry.rect(x, y, w, h)
-    win:move(rect, duration)
+-- Apply padding inside a target region
+local function padded(region)
+    return {
+        x = region.x + padding,
+        y = region.y + padding,
+        w = region.w - padding * 2,
+        h = region.h - padding * 2
+    }
 end
 
-function moveWindowToCorner(corner, percent, duration)
-    local win = hs.window.focusedWindow()
-    duration = duration or 0.15
-    percent = percent / 100
-
-    local f = win:screen():frame()  -- usable screen area
-
-    -- apply uniform padding
-    local padX = f.w * percent
-    local padY = f.h * percent
-    local insetFrame = hs.geometry.rect(
-        f.x + padX,
-        f.y + padY,
-        f.w - padX * 2,
-        f.h - padY * 2
-    )
-
-    local x, y, w, h = insetFrame.x, insetFrame.y, insetFrame.w / 2, insetFrame.h / 2
-
-    if corner == "topLeft" then
-        w = w - padX
-        h = h - padY
-    elseif corner == "topRight" then
-        w = w - padX
-        h = h - padY
-        x = x + w + (padX * 2)
-    elseif corner == "bottomLeft" then
-        w = w - padX
-        h = h - padY
-        y = y + h + (padY * 2)
-    elseif corner == "bottomRight" then
-        w = w - padX
-        h = h - padY
-        x = x + w + (padX * 2)
-        y = y + h + (padY * 2)
-    else
-        return  -- invalid corner
-    end
-
-    local rect = hs.geometry.rect(x, y, w, h)
-    win:move(rect, duration)
+local function set(win, region)
+    if not win then return end
+    win:setFrame(region, animationDuration)
 end
 
+-------------------------------------------------
+-- WINDOW LAYOUTS
+-------------------------------------------------
 
-function cycleScreen(dir)
-    -- get the focused window
-    local win = hs.window.focusedWindow()
+-- Fullscreen (with padding)
+local function fullscreen(win)
+    local s = screenFrame(win:screen())
+    set(win, padded(s))
+end
+
+-- Small fullscreen (centered with inset)
+local function smallFullscreen(win, inset)
+    inset = inset or 150
+    local s = screenFrame(win:screen())
+    local region = {
+        x = s.x + inset,
+        y = s.y + inset,
+        w = s.w - inset * 2,
+        h = s.h - inset * 2
+    }
+    set(win, padded(region))
+end
+
+-- Keep current size but center on screen
+local function center(win)
+    local f = win:frame()
+    local s = screenFrame(win:screen())
+    local region = {
+        x = s.x + (s.w - f.w) / 2,
+        y = s.y + (s.h - f.h) / 2,
+        w = f.w,
+        h = f.h
+    }
+    set(win, region)
+end
+
+-------------------------------------------------
+-- SPLITS
+-------------------------------------------------
+
+local function leftHalf(win)
+    local s = screenFrame(win:screen())
+    local region = { x = s.x, y = s.y, w = s.w / 2, h = s.h }
+    set(win, padded(region))
+end
+
+local function rightHalf(win)
+    local s = screenFrame(win:screen())
+    local region = { x = s.x + s.w/2, y = s.y, w = s.w / 2, h = s.h }
+    set(win, padded(region))
+end
+
+local function topHalf(win)
+    local s = screenFrame(win:screen())
+    local region = { x = s.x, y = s.y, w = s.w, h = s.h / 2 }
+    set(win, padded(region))
+end
+
+local function bottomHalf(win)
+    local s = screenFrame(win:screen())
+    local region = { x = s.x, y = s.y + s.h/2, w = s.w, h = s.h / 2 }
+    set(win, padded(region))
+end
+
+-------------------------------------------------
+-- QUARTER GRID (2×2)
+-------------------------------------------------
+
+local function grid(win, gx, gy, gw, gh)
+    local s = screenFrame(win:screen())
+    local cellW = s.w / 2
+    local cellH = s.h / 2
+
+    local region = {
+        x = s.x + gx * cellW,
+        y = s.y + gy * cellH,
+        w = gw * cellW,
+        h = gh * cellH
+    }
+
+    set(win, padded(region))
+end
+
+-------------------------------------------------
+-- MOVE TO NEXT MONITOR
+-------------------------------------------------
+
+function moveToNextMonitor(win, dir)
     -- get the screen where the focused window is displayed, a.k.a. current screen
     local screen = win:screen()
     -- compute the unitRect of the focused window relative to the current screen
@@ -112,36 +128,30 @@ function cycleScreen(dir)
     win:move(win:frame():toUnitRect(screen:frame()), dir == 'left' and screen:previous() or screen:next(), true):centerOnScreen()
 end
 
-hs.hotkey.bind({'alt', 'cmd'}, 'right', function() cycleScreen('right') end)
+-------------------------------------------------
+-- HOTKEYS
+-------------------------------------------------
 
-hs.hotkey.bind({'alt', 'cmd'}, 'left', function() cycleScreen('left') end)
+local mash = {"ctrl", "alt", "cmd"}
 
--- half of screen
--- {frame.x, frame.y, window.w, window.h}
--- First two elements: we decide the position of frame
--- Last two elements: we decide the size of frame
-hs.hotkey.bind({'ctrl', 'alt'}, 'left', function() moveWindowHalfWithPadding('left', 0.5) end)
-hs.hotkey.bind({'ctrl', 'alt'}, 'right', function() moveWindowHalfWithPadding('right', 0.5) end)
-hs.hotkey.bind({'ctrl', 'alt'}, 'up', function() moveWindowHalfWithPadding('up', 0.5) end)
-hs.hotkey.bind({'ctrl', 'alt'}, 'down', function() moveWindowHalfWithPadding('down', 0.5) end)
+-- Fullscreen, small fullscreen, center
+hs.hotkey.bind({'alt'}, "m", function() fullscreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind({'alt'}, "n", function() smallFullscreen(hs.window.focusedWindow()) end)
+hs.hotkey.bind({'ctrl', 'alt'}, "c", function() center(hs.window.focusedWindow()) end)
 
--- quarter of screen
---[[
-    u i
-    j k
---]]
-hs.hotkey.bind({'ctrl', 'alt', 'cmd'}, 'u', function() moveWindowToCorner('topLeft', 0.5) end)
-hs.hotkey.bind({'ctrl', 'alt', 'cmd'}, 'k', function() moveWindowToCorner('bottomRight', 0.5) end)
-hs.hotkey.bind({'ctrl', 'alt', 'cmd'}, 'i', function() moveWindowToCorner('topRight', 0.5) end)
-hs.hotkey.bind({'ctrl', 'alt', 'cmd'}, 'j', function() moveWindowToCorner('bottomLeft', 0.5) end)
+-- Splits
+hs.hotkey.bind(mash, "h", function() leftHalf(hs.window.focusedWindow()) end)
+hs.hotkey.bind(mash, "l", function() rightHalf(hs.window.focusedWindow()) end)
+hs.hotkey.bind(mash, "k", function() topHalf(hs.window.focusedWindow()) end)
+hs.hotkey.bind(mash, "j", function() bottomHalf(hs.window.focusedWindow()) end)
 
+-- Quarter grid (2×2)
+hs.hotkey.bind(mash, "u", function() grid(hs.window.focusedWindow(), 0, 0, 1, 1) end)
+hs.hotkey.bind(mash, "i", function() grid(hs.window.focusedWindow(), 1, 0, 1, 1) end)
+hs.hotkey.bind(mash, "o", function() grid(hs.window.focusedWindow(), 0, 1, 1, 1) end)
+hs.hotkey.bind(mash, "p", function() grid(hs.window.focusedWindow(), 1, 1, 1, 1) end)
 
--- full screen
-hs.hotkey.bind({'alt'}, 'm', function() maximizeWithPercentPadding(0.5) end)
-
--- smaller screen
-hs.hotkey.bind({'alt'}, 'n', function() maximizeWithPercentPadding(10) end)
-
--- center screen
-hs.hotkey.bind({'ctrl', 'alt'}, 'c', function() hs.window.focusedWindow():centerOnScreen() end)
+-- Move window to next monitor
+hs.hotkey.bind({'alt', 'cmd'}, "right", function() moveToNextMonitor(hs.window.focusedWindow(), 'right') end)
+hs.hotkey.bind({'alt', 'cmd'}, "left", function() moveToNextMonitor(hs.window.focusedWindow(), 'left') end)
 
