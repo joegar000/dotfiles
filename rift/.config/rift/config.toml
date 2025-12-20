@@ -105,7 +105,7 @@ default_orientation = "horizontal"
 [settings.layout.gaps.outer]
 top = 10
 left = 10
-bottom = 10
+bottom = 40
 right = 10
 
 [settings.layout.gaps.inner]
