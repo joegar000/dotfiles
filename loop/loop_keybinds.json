@@ -15,12 +15,6 @@
       ]
     },
     {
-      "direction" : "Center",
-      "keybind" : [
-        8
-      ]
-    },
-    {
       "cycle" : [
         {
           "direction" : "BottomHalf",
@@ -129,7 +123,19 @@
       "name" : "Top Cycle"
     },
     {
+      "direction" : "MacOSCenter",
+      "keybind" : [
+        8
+      ]
+    },
+    {
       "direction" : "Maximize",
+      "keybind" : [
+        5
+      ]
+    },
+    {
+      "direction" : "NextScreen",
       "keybind" : [
         3
       ]
@@ -138,6 +144,12 @@
       "direction" : "NoAction",
       "keybind" : [
 
+      ]
+    },
+    {
+      "direction" : "PreviousScreen",
+      "keybind" : [
+        1
       ]
     },
     {
