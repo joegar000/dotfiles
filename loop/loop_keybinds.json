@@ -123,6 +123,12 @@
       "name" : "Top Cycle"
     },
     {
+      "direction" : "Larger",
+      "keybind" : [
+        9
+      ]
+    },
+    {
       "direction" : "MacOSCenter",
       "keybind" : [
         8
@@ -141,15 +147,15 @@
       ]
     },
     {
-      "direction" : "NoAction",
-      "keybind" : [
-
-      ]
-    },
-    {
       "direction" : "PreviousScreen",
       "keybind" : [
         1
+      ]
+    },
+    {
+      "direction" : "Smaller",
+      "keybind" : [
+        7
       ]
     },
     {
