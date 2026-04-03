@@ -16,9 +16,9 @@
 #   ease_in_quint, ease_out_quint, ease_in_out_quint,
 #   ease_in_expo, ease_out_expo, ease_in_out_expo,
 #   ease_in_circ, ease_out_circ, ease_in_out_circ
-animate = true
+animate = false
 animation_duration = 0.3
-animation_fps = 100.0
+animation_fps = 60
 animation_easing = "ease_in_out"
 
 # Space activation behavior
@@ -26,15 +26,15 @@ animation_easing = "ease_in_out"
 #   and you must toggle activation via a keybind (toggle_space_activated).
 # - If false, spaces are managed by default and you can disable specific ones.
 # Default is true; uncomment to change.
-#default_disable = false
+default_disable = false
 
 # Mouse/Focus behavior
 # - focus_follows_mouse: moving the mouse into a window focuses it
 # - mouse_follows_focus: when focus changes, move the mouse to the focused window
 # - mouse_hides_on_focus: hide the mouse cursor after focusing a window
-focus_follows_mouse = true
+focus_follows_mouse = false
 mouse_follows_focus = true
-mouse_hides_on_focus = true
+mouse_hides_on_focus = false
 # focus_follows_mouse_disable_hotkey temporarily suspends focus-follows-mouse while held
 # e.g. "Fn"; omit or set to null to keep focus-follows-mouse always active
 #focus_follows_mouse_disable_hotkey = "Fn"
@@ -105,7 +105,7 @@ default_orientation = "horizontal"
 [settings.layout.gaps.outer]
 top = 10
 left = 10
-bottom = 40
+bottom = 10
 right = 10
 
 [settings.layout.gaps.inner]
@@ -327,17 +327,17 @@ comb1 = "Alt + Shift"
 "comb1 + K" = { move_node = "up" }
 "comb1 + L" = { move_node = "right" }
 
-"Alt + 0" = { switch_to_workspace = 0 }
-"Alt + 1" = { switch_to_workspace = 1 }
-"Alt + 2" = { switch_to_workspace = 2 }
-"Alt + 3" = { switch_to_workspace = 3 }
+# "Alt + 0" = { switch_to_workspace = 0 }
+# "Alt + 1" = { switch_to_workspace = 1 }
+# "Alt + 2" = { switch_to_workspace = 2 }
+# "Alt + 3" = { switch_to_workspace = 3 }
 
-"comb1 + 0" = { move_window_to_workspace = 0 }
-"comb1 + 1" = { move_window_to_workspace = 1 }
-"comb1 + 2" = { move_window_to_workspace = 2 }
-"comb1 + 3" = { move_window_to_workspace = 3 }
+# "comb1 + 0" = { move_window_to_workspace = 0 }
+# "comb1 + 1" = { move_window_to_workspace = 1 }
+# "comb1 + 2" = { move_window_to_workspace = 2 }
+# "comb1 + 3" = { move_window_to_workspace = 3 }
 
-"Alt + Tab" = "switch_to_last_workspace"
+# "Alt + Tab" = "switch_to_last_workspace"
 
 "Alt + Shift + Left" = { join_window = "left" }
 "Alt + Shift + Right" = { join_window = "right" }
@@ -358,8 +358,8 @@ comb1 = "Alt + Shift"
 
 # Move mouse cursor to display by index (0-based) or UUID
 # Examples:
-# "Alt + Shift + A" = { move_mouse_to_display = 0 }
-# "Alt + Shift + S" = { move_mouse_to_display = 1 }
+"Alt + Shift + A" = { focus_display = "left" }
+"Alt + Shift + S" = { focus_display = "right" }
 # "Alt + Shift + D" = { move_mouse_to_display = "e9a4f5a1-2f8b-45c1-9f4e-5a6b7c8d9e0f" }
 # Focus another display (direction/index/uuid)
 # "Alt + Shift + F" = { focus_display = { direction = "right" } }
@@ -367,8 +367,8 @@ comb1 = "Alt + Shift"
 # Move a window to a display (by index, UUID, or direction)
 # "Alt + Ctrl + Up" = { move_window_to_display = { selector = "up" } }
 # "Alt + Ctrl + Down" = { move_window_to_display = { selector = "down" } }
-# "Alt + Ctrl + Left" = { move_window_to_display = { selector = "left" } }
-# "Alt + Ctrl + Right" = { move_window_to_display = { selector = "right" } }
+"Alt + Ctrl + Left" = { move_window_to_display = { selector = "left" } }
+"Alt + Ctrl + Right" = { move_window_to_display = { selector = "right" } }
 # "Alt + Ctrl + A" = { move_window_to_display = { selector = 0 } }
 
 # if mission control is enabled
