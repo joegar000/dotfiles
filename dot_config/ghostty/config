@@ -1,0 +1,13 @@
+term = "xterm-256color"
+theme = Catppuccin Mocha
+
+font-family = "MesloLGS Nerd Font Mono"
+font-thicken
+font-thicken-strength = 150
+font-size = 13
+
+cursor-style = block
+shell-integration-features = no-cursor
+
+window-padding-x = 10
+window-padding-y = 10
