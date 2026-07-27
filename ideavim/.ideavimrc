@@ -1,0 +1,70 @@
+" nnoremap <SPACE> <Nop>
+
+let mapleader = " "
+
+nmap K <Action>(ShowHoverInfo)
+
+set surround
+
+set nerdtree
+map <leader>e :NERDTreeToggle<CR>
+
+set which-key
+set notimeout
+let g:WhichKeyDesc_zen_mode = "<leader>z Toggle Zen Mode"
+let g:WhichKeyDesc_leader = "<leader> Leader key"
+
+set hlsearch
+
+set relativenumber
+
+set scrolloff=8
+
+set showmode
+
+set showcmd
+
+set visualbell
+
+" Folding
+map <leader>zf :action CollapseAllRegions<CR>
+map <leader>zd :action ExpandAllRegions<CR>
+let g:WhichKeyDesc_fold = "<leader>z Folding"
+let g:WhichKeyDesc_fold_all = "<leader>zc Fold all regions"
+let g:WhichKeyDesc_unfold_all = "<leader>zo Unfold all regions"
+
+" Go to code
+nmap <leader>gd <Action>(GotoDeclaration)
+" nmap <leader>gy GotoTypeDeclaration
+" nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gr <Action>(ShowUsages)
+" nmap <leader>gt <Action>(GotoTest)
+" nmap <leader>gf <Action>(Back)
+" nmap <leader>gb <Action>(Forward)
+
+" Comment lines
+map zc <Action>(CommentByLineComment)
+
+" Move focus to the window on the left
+nmap <silent> <C-h> <C-w>h
+" Move focus to the window below
+nmap <silent> <C-j> <C-w>j
+" Move focus to the window above
+nmap <silent> <C-k> <C-w>k
+" Move focus to the window on the right
+nmap <silent> <C-l> <C-w>l
+
+" Swap current window with the one to the left
+nmap <C-W><S-H> <C-W>H
+" Swap current window with the one below
+nmap <C-W><S-J> <C-W>J
+" Swap current window with the one above
+nmap <C-W><S-K> <C-W>K
+" Swap current window with the one to the right
+nmap <C-W><S-L> <C-W>L
+
+" Move editor to opposite tab group
+map <C-W><leader> <Action>(MoveEditorToOppositeTabGroup)
+
+set VimEverywhere   " add this to ~/.ideavimrc and restart
+
