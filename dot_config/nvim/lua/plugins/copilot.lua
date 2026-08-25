@@ -2,7 +2,7 @@
 -- This is an alternative written in lua
 return {
     "zbirenbaum/copilot.lua",
-    enabled = true,
+    enabled = false,
     cond = not InVSCode,
     cmd = "Copilot",
     event = "InsertEnter",
