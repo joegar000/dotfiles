@@ -2,7 +2,7 @@ return {
   -- Add Catppuccin and configure its flavour or options
   {
     "catppuccin/nvim",
-    lazy = false,
+    lazy = true,
     name = "catppuccin",
     opts = {
       flavour = "mocha",
