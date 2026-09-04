@@ -5,3 +5,4 @@
 vim.g.autoformat = false
 vim.b.autoformat = false
 vim.opt.clipboard = ""
+vim.g.snacks_animate = false
