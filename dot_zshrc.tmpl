@@ -129,7 +129,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+{{ if eq .chezmoi.os "darwin" }}
 eval "$(mise activate zsh)"
+{{ else if eq .chezmoi.os "linux"  }}
+eval "$(~/.local/bin/mise activate zsh)"
+{{ end }}
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
