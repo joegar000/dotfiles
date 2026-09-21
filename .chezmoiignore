@@ -2,4 +2,8 @@
 .config/hypr/**
 {{ end }}
 
+{{ if ne .chezmoi.os "darwin" }}
+.hammerspoon/**
+{{ end }}
+
 .config/nvim/lazyvim.json
