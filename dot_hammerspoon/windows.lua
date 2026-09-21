@@ -106,70 +106,49 @@ end
 -- Monitor movement
 -- ─────────────────────────────────────────────────────────────
 
+local function moveToRelativeScreen(win, targetScreen)
+    if not targetScreen then return end
+
+    local oldFrame = screenFrame(win:screen())
+    local oldWindow = win:frame()
+
+    -- Calculate the window's position and size as percentages
+    -- of the usable area of the current screen.
+    local relative = {
+        x = (oldWindow.x - oldFrame.x) / oldFrame.w,
+        y = (oldWindow.y - oldFrame.y) / oldFrame.h,
+        w = oldWindow.w / oldFrame.w,
+        h = oldWindow.h / oldFrame.h,
+    }
+
+    local newFrame = screenFrame(targetScreen)
+
+    local newWindow = {
+        x = newFrame.x + newFrame.w * relative.x,
+        y = newFrame.y + newFrame.h * relative.y,
+        w = newFrame.w * relative.w,
+        h = newFrame.h * relative.h,
+    }
+
+    -- Move to the new screen first, then apply the relative frame.
+    win:moveToScreen(targetScreen, animationDuration)
+
+    animateWindow(win, newWindow)
+end
+
 function M.nextScreen()
     local win = currentWindow()
     if not win then return end
 
-    local screen = win:screen()
-    local nextScreen = screen:toEast()
-
-    if nextScreen then
-        win:moveToScreen(nextScreen, animationDuration)
-    end
+    moveToRelativeScreen(win, win:screen():toEast())
 end
 
 function M.previousScreen()
     local win = currentWindow()
     if not win then return end
 
-    local screen = win:screen()
-    local previousScreen = screen:toWest()
-
-    if previousScreen then
-        win:moveToScreen(previousScreen, animationDuration)
-    end
+    moveToRelativeScreen(win, win:screen():toWest())
 end
-
-
--- Move to another monitor
-function M.nextScreenRight()
-    local win = currentWindow()
-    if not win then return end
-
-    local nextScreen = win:screen():toEast()
-    if not nextScreen then return end
-
-    local frame = screenFrame(nextScreen)
-
-    win:moveToScreen(nextScreen, animationDuration)
-
-    animateWindow(win, {
-        x = frame.x,
-        y = frame.y,
-        w = win:size().w,
-        h = frame.h,
-    })
-end
-
-function M.previousScreenLeft()
-    local win = currentWindow()
-    if not win then return end
-
-    local previousScreen = win:screen():toWest()
-    if not previousScreen then return end
-
-    local frame = screenFrame(previousScreen)
-
-    win:moveToScreen(previousScreen, animationDuration)
-
-    animateWindow(win, {
-        x = frame.x,
-        y = frame.y,
-        w = win:size().w,
-        h = frame.h,
-    })
-end
-
 
 -- ─────────────────────────────────────────────────────────────
 -- Hotkeys
@@ -193,8 +172,8 @@ local bindings = {
     { "c", M.center },
 
     -- Screen
-    { ";", M.previousScreenLeft },
-    { "'", M.nextScreenRight },
+    { ";", M.previousScreen },
+    { "'", M.nextScreen },
 }
 
 for _, binding in ipairs(bindings) do
