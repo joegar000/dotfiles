@@ -172,8 +172,8 @@ local bindings = {
     { "c", M.center },
 
     -- Screen
-    { ";", M.previousScreen },
-    { "'", M.nextScreen },
+    { "a", M.previousScreen },
+    { "f", M.nextScreen },
 }
 
 for _, binding in ipairs(bindings) do
