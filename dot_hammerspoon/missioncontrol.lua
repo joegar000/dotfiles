@@ -449,8 +449,4 @@ end
 
 -- Temporary activation shortcut.
 -- Change this to whatever you ultimately want.
-hs.hotkey.bind(
-    { "ctrl", "alt" },
-    "m",
-    startMissionControlNav
-)
+hs.hotkey.bind({ "cmd", "ctrl", "shift", "alt" }, "o", startMissionControlNav)
