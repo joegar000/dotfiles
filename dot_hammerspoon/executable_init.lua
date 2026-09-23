@@ -1,6 +1,7 @@
 hs.loadSpoon("SpoonInstall")
 
 require('windows')
+require('missioncontrol')
 
 spoon.SpoonInstall:andUse("MouseFollowsFocus", {
     start = true,
