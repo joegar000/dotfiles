@@ -409,8 +409,10 @@ local function installNavigationHotkeys()
     end
 end
 
-local function startMissionControlNav()
+local function toggleMissionControlNav()
     if mcNav.active then
+        stopMissionControlNav()
+        hs.spaces.closeMissionControl()
         return
     end
 
@@ -447,6 +449,90 @@ local function startMissionControlNav()
     end)
 end
 
+local function enableMissionControlNav()
+    if mcNav.active then
+        return
+    end
+
+    mcNav.thumbnails = findThumbnails()
+
+    if #mcNav.thumbnails == 0 then
+        return
+    end
+
+    mcNav.active = true
+
+    sortThumbnailsVisually(mcNav.thumbnails)
+    assignShortcuts()
+    drawLabels()
+
+    mcNav.selected = findClosestThumbnailToMouse()
+
+    if mcNav.selected then
+        moveMouseToThumbnail(mcNav.selected)
+    end
+
+    installNavigationHotkeys()
+end
+
+
+local missionControlVisible = false
+
+local function isMissionControlVisible()
+    local wm = hs.application.get("com.apple.WindowManager")
+
+    if not wm then
+        return false
+    end
+
+    local root = hs.axuielement.applicationElement(wm)
+
+    local function findMCDisplay(el, depth)
+        depth = depth or 0
+
+        if depth > 6 then
+            return false
+        end
+
+        if el:attributeValue("AXIdentifier") == "mc.display" then
+            return true
+        end
+
+        for _, child in ipairs(el:attributeValue("AXChildren") or {}) do
+            if findMCDisplay(child, depth + 1) then
+                return true
+            end
+        end
+
+        return false
+    end
+
+    return findMCDisplay(root)
+end
+
+_G.mcVisibilityWatcher = hs.timer.doEvery(0.1, function()
+    local visible = isMissionControlVisible()
+
+    if visible and not missionControlVisible then
+        missionControlVisible = true
+
+        -- Give Mission Control just a moment to finish laying
+        -- out all of the thumbnail AXButtons.
+        hs.timer.doAfter(0.1, function()
+            if isMissionControlVisible() then
+                enableMissionControlNav()
+            end
+        end)
+
+    elseif not visible and missionControlVisible then
+        missionControlVisible = false
+
+        if mcNav.active then
+            stopMissionControlNav()
+        end
+    end
+end)
+
 -- Temporary activation shortcut.
--- Change this to whatever you ultimately want.
-hs.hotkey.bind({ "cmd", "ctrl", "shift", "alt" }, "o", startMissionControlNav)
+-- Change this to whatever you want.
+-- hs.hotkey.bind({ "cmd", "ctrl", "shift", "alt" }, "o", toggleMissionControlNav)
