@@ -1,9 +1,8 @@
 onboarding = false
 
 [keys]
-next_agent = "prefix+a"
-previous_agent = "prefix+shift+a"
-focus_agent = "alt+1..9"
+switch_workspace = "alt+1..9"
+focus_agent = "ctrl+alt+1..9"
 
 [[keys.command]]
 key = "ctrl+h"
@@ -38,3 +37,12 @@ type = "shell"
 command = "\"$HERDR_BIN_PATH\" pane send-keys \"$HERDR_ACTIVE_PANE_ID\" ctrl+l"
 description = "send ctrl+l (clear screen) to pane"
 
+[ui]
+status_indicators = "dots"
+
+[ui.toast]
+delivery = "system"
+
+[theme]
+name = "catppuccin"
+auto_switch = false
