@@ -3,6 +3,7 @@ onboarding = false
 [keys]
 next_agent = "prefix+a"
 previous_agent = "prefix+shift+a"
+focus_agent = "alt+1..9"
 
 [[keys.command]]
 key = "ctrl+h"
