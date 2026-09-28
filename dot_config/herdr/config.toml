@@ -1,0 +1,39 @@
+onboarding = false
+
+[keys]
+next_agent = "prefix+a"
+previous_agent = "prefix+shift+a"
+
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "herdr-navigator.left"
+description = "navigate left (nvim/herdr)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "herdr-navigator.down"
+description = "navigate down (nvim/herdr)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "herdr-navigator.up"
+description = "navigate up (nvim/herdr)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "herdr-navigator.right"
+description = "navigate right (nvim/herdr)"
+
+# clear-screen parity: the direct ctrl+l chord is taken by navigation,
+# so prefix+ctrl+l sends a literal ctrl+l to the pane (the analogue of
+# vim-tmux-navigator's `bind C-l send-keys C-l`).
+[[keys.command]]
+key = "prefix+ctrl+l"
+type = "shell"
+command = "\"$HERDR_BIN_PATH\" pane send-keys \"$HERDR_ACTIVE_PANE_ID\" ctrl+l"
+description = "send ctrl+l (clear screen) to pane"
+
