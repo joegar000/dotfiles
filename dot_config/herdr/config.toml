@@ -3,29 +3,31 @@ onboarding = false
 [keys]
 switch_workspace = "alt+1..9"
 focus_agent = "ctrl+alt+1..9"
+open_worktree = "prefix+o"
+remove_worktree = "prefix+shift+o"
 
 [[keys.command]]
 key = "ctrl+h"
 type = "plugin_action"
-command = "herdr-navigator.left"
+command = "herdr-nvim-nav.left"
 description = "navigate left (nvim/herdr)"
 
 [[keys.command]]
 key = "ctrl+j"
 type = "plugin_action"
-command = "herdr-navigator.down"
+command = "herdr-nvim-nav.down"
 description = "navigate down (nvim/herdr)"
 
 [[keys.command]]
 key = "ctrl+k"
 type = "plugin_action"
-command = "herdr-navigator.up"
+command = "herdr-nvim-nav.up"
 description = "navigate up (nvim/herdr)"
 
 [[keys.command]]
 key = "ctrl+l"
 type = "plugin_action"
-command = "herdr-navigator.right"
+command = "herdr-nvim-nav.right"
 description = "navigate right (nvim/herdr)"
 
 # clear-screen parity: the direct ctrl+l chord is taken by navigation,
@@ -39,6 +41,7 @@ description = "send ctrl+l (clear screen) to pane"
 
 [ui]
 status_indicators = "dots"
+pane_gaps = false
 
 [ui.toast]
 delivery = "system"
