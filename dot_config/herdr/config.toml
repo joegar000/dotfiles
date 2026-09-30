@@ -54,13 +54,6 @@ type = "plugin_action"
 command = "worktrunk.open-current"
 description = "Worktree: switch / create from current branch"
 
-# Optional: include remote-tracking branches for this picker.
-[[keys.command]]
-key = "prefix+shift+r"
-type = "plugin_action"
-command = "worktrunk.open-with-remotes"
-description = "Worktree: switch / create from local or remote branches"
-
 [[keys.command]]
 key = "prefix+shift+d"
 type = "plugin_action"
@@ -78,13 +71,22 @@ sidebar_min_width = 36
 sidebar_width = 36
 sidebar_max_width = 36
 sidebar_collapsed_mode = "hidden"
-pane_outer_borders = false
+pane_borders = "always"
+pane_outer_borders = true
 
 status_indicators = "dots"
 pane_gaps = false
 
+tab_bar_right = [
+  { type = "zoom" },
+  { type = "hostname" },
+  { type = "datetime", format = "%H:%M" },
+  { type = "command", command = "~/.config/herdr/status.sh", interval_seconds = 5, timeout_seconds = 2 },
+]
+tab_bar_right_separator = " · "
+
 [ui.toast]
-delivery = "system"
+delivery = "herdr"
 
 [theme]
 name = "catppuccin"
