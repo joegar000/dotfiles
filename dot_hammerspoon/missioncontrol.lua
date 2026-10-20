@@ -368,6 +368,8 @@ local function findClosestThumbnailToMouse()
 end
 
 local function installNavigationHotkeys()
+    -- Legacy navigation bindings, retained for restoring this module later.
+    --[[
     mcNav.hotkeys = {
         hs.hotkey.bind({}, "h", function()
             moveSelection("left")
@@ -407,6 +409,7 @@ local function installNavigationHotkeys()
             )
         end
     end
+    --]]
 end
 
 local function toggleMissionControlNav()

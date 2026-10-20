@@ -1,16 +1,19 @@
 hs.loadSpoon("SpoonInstall")
 
-require('windows')
-require('missioncontrol')
+require("commands")
 
-spoon.SpoonInstall:andUse("MouseFollowsFocus", {
-    start = true,
-})
+-- Legacy automation, retained for switching back to Hammerspoon hotkeys.
+-- require('windows')
+-- require('missioncontrol')
+
+-- spoon.SpoonInstall:andUse("MouseFollowsFocus", {
+--     start = true,
+-- })
 
 spoon.SpoonInstall:andUse("Caffeine", {
     start = true,
 })
-hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "C", function()
+local function toggleCaffeine()
     local enabled = not hs.caffeinate.get("displayIdle")
     spoon.Caffeine:setState(enabled)
     hs.alert.show(
@@ -29,4 +32,6 @@ hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "C", function()
         hs.screen.mainScreen(),
         0.7
     )
-end)
+end
+
+-- hs.hotkey.bind({ "cmd", "alt", "ctrl" }, "C", toggleCaffeine)

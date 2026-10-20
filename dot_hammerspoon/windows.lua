@@ -176,6 +176,8 @@ local bindings = {
     { "f", M.nextScreen },
 }
 
+-- Legacy hotkeys: uncomment this block to restore the original bindings.
+--[[
 for _, binding in ipairs(bindings) do
     local key = binding[1]
     local fn = binding[2]
@@ -188,5 +190,6 @@ for _, binding in ipairs(bindings) do
 
     hs.hotkey.bind(mods, key, fn)
 end
+--]]
 
 return M
