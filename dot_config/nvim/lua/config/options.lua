@@ -5,3 +5,11 @@
 vim.g.autoformat = false
 vim.b.autoformat = false
 vim.opt.clipboard = ""
+
+-- make lazyvim project root try to use `.git` folder first
+vim.g.root_spec = {
+  { ".git" },
+  "lsp",
+  { "lua" },
+  "cwd"
+}
