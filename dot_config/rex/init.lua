@@ -34,6 +34,11 @@ rex.bind("ctrl+b>x", "pane.close")
 rex.bind("ctrl+b>z", "pane.zoom")
 rex.bind("ctrl+b>m", "pane.zoom") -- Your custom tmux zoom key.
 rex.bind("ctrl+b>shift+1", "pane.move_to_new_tab") -- !
+rex.bind("ctrl+b>f", "pane.float") -- Toggle the focused pane between floating and tiled.
+rex.bind("ctrl+b>shift+f", "pane.new_floating") -- Create and focus a floating terminal.
+
+-- Enter Rex's native copy mode (Vim-style scrollback navigation and selection).
+rex.bind("ctrl+b>[", "pane.copy_mode.enter")
 
 -- Your Vim-style pane navigation.
 rex.bind("ctrl+b>h", "pane.focus", { direction = "left" })
